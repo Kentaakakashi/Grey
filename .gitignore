@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+/node_modules
+
+# Next.js build output
+.next/
+/.next
+out/
+
+# Environment files — NEVER commit real values
+.env
+.env.local
+.env.production
+.env*.local
+!.env.example
+
+# PHP API credentials — NEVER commit your real config
+# api/config.php  ← uncomment this line if you want to ignore config.php
+#                    and use api/config.php.example as the template
+
+# OS / Editor
+.DS_Store
+*.log
+*.swp
+.idea/
+.vscode/
+
+# Test coverage
+coverage/
+
+# TypeScript incremental build info
+tsconfig.tsbuildinfo

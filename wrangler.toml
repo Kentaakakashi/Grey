@@ -1,0 +1,26 @@
+# Cloudflare Pages / Workers configuration
+# portfolio-website-for-graphic-designers
+# by AIrflute Technologies | patamde.com
+#
+# ──────────────────────────────────────────────────────────────────────────────
+# ⚠️  PHP API NOT SUPPORTED ON CLOUDFLARE WORKERS
+#
+# Cloudflare Workers runs JavaScript/TypeScript only — it does NOT support PHP.
+# This template uses a PHP API backend for the admin panel.
+#
+# To deploy on Cloudflare Pages (static frontend only), the frontend works
+# perfectly — but the admin panel and content API require a PHP host.
+#
+# For a fully managed Cloudflare deployment with an API solution, contact us:
+#   📧 business@patamde.com
+#   🌐 patamde.com
+#
+# We specialise in building custom portfolio websites for graphic designers
+# on any hosting platform — reach out and we'll handle everything for you.
+# ──────────────────────────────────────────────────────────────────────────────
+
+name = "portfolio-website-for-graphic-designers"
+compatibility_date = "2024-01-01"
+
+[site]
+bucket = "./out"
