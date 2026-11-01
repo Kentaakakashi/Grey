@@ -1,0 +1,63 @@
+name: Extract Framer export
+
+on:
+  push:
+    paths:
+      - "extraordinary-managers-592057-framer-app.zip"
+      - ".github/workflows/extract-framer-export.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract ZIP into repository root
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP="extraordinary-managers-592057-framer-app.zip"
+          if [ ! -f "$ZIP" ]; then
+            echo "ZIP not present; nothing to extract."
+            exit 0
+          fi
+
+          mkdir -p /tmp/minux-export
+          unzip -q "$ZIP" -d /tmp/minux-export
+
+          # If the ZIP contains one wrapper directory, use its contents.
+          shopt -s dotglob nullglob
+          entries=(/tmp/minux-export/*)
+          if [ "${#entries[@]}" -eq 1 ] && [ -d "${entries[0]}" ]; then
+            source_dir="${entries[0]}"
+          else
+            source_dir="/tmp/minux-export"
+          fi
+
+          # Preserve the repository README and this workflow; replace other
+          # tracked/project files with the exported website files.
+          find . -mindepth 1 -maxdepth 1 ! -name ".git" ! -name ".github" ! -name "README.md" ! -name "$ZIP" -exec rm -rf {} +
+          cp -a "$source_dir"/. .
+          rm -f "$ZIP"
+
+          echo "Extracted files:"
+          find . -maxdepth 2 -type f ! -path "./.git/*" | sort | head -200
+
+      - name: Commit extracted files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Extract Minux Framer export"
+          git push
