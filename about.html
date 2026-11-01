@@ -267,7 +267,18 @@ fbq('track', 'PageView');
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-P8H8DQ7GZ3"></script>
 <style>#__framer-badge-container,#__framer-editorbar-container,[class*="framer-badge"],[class*="framer-editor"],iframe[src*="framer.com"]:not([src*="framerusercontent"]){display:none!important}</style>
-<style id="grey-single-designer-cleanup">/* Keep the circular featured portrait; remove only the row of alternate staff portraits. */[data-framer-name="Team Member Selector"]{display:none!important}[name="Get Template Button"],[data-framer-name="Get Template Button"],a[href*="framer.com/community/marketplace/templates/"]{display:none!important}</style>
+<style id="grey-single-designer-cleanup">
+/* Single-person portfolio: retain the circular hero portrait, remove staff carousel UI. */
+[data-framer-name="Team Member Selector"],
+.framer-128q5b5,
+[data-framer-name="(the team)"] { display:none !important; }
+[name="Get Template Button"],
+[data-framer-name="Get Template Button"],
+a[href*="framer.com/community/marketplace/templates/"],
+#__framer-badge-container,
+#__framer-editorbar-container,
+[class*="framer-badge"] { display:none !important; }
+</style>
 </head>
 <body>
 
