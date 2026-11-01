@@ -267,24 +267,7 @@ fbq('track', 'PageView');
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-P8H8DQ7GZ3"></script>
 <style>#__framer-badge-container,#__framer-editorbar-container,[class*="framer-badge"],[class*="framer-editor"],iframe[src*="framer.com"]:not([src*="framerusercontent"]){display:none!important}</style>
-<style id="grey-single-designer-cleanup">
-/* Grey: single-person portfolio cleanup */
-[name="Get Template Button"],
-[data-framer-name="Get Template Button"],
-a[href*="framer.com/community/marketplace/templates/"] { display:none !important; }
-/* Hide whole agency/team/testimonial modules, not only their labels. */
-div:has([data-framer-name="Team Member Selector"]),
-div:has([data-framer-name="Ethan Member Button"]),
-div:has([data-framer-name="Team Member Grid"]),
-div:has([data-framer-name="Team Introduction"]),
-div:has([data-framer-name="(the team)"]),
-div:has([data-framer-name="About Team"]),
-div:has([data-framer-name="Our Clients"]),
-div:has([data-framer-name="Other Agency"]),
-div:has([data-framer-name="Testimonial"]),
-div:has([data-framer-name="Testimonials"]),
-div:has([data-framer-name="+ BASED IN Row"]) { display:none !important; }
-</style>
+<style id="grey-single-designer-cleanup">[name="Get Template Button"],[data-framer-name="Get Template Button"],a[href*="framer.com/community/marketplace/templates/"]{display:none!important}</style>
 </head>
 <body>
 
@@ -306,5 +289,90 @@ div:has([data-framer-name="+ BASED IN Row"]) { display:none !important; }
 </div>
 <!-- Start of bodyEnd -->
 <!-- End of bodyEnd -->
+<script id="grey-diagnostics">
+(function () {
+  if (window.__greyDiagnosticsInstalled) return;
+  window.__greyDiagnosticsInstalled = true;
+  var errors = [];
+  var maxErrors = 40;
+  function add(type, message, source, line, extra) {
+    errors.push({type:type, message:String(message || "Unknown error").slice(0,500), source:source || "", line:line || "", extra:extra || "", time:new Date().toISOString()});
+    if (errors.length > maxErrors) errors.shift();
+  }
+  window.addEventListener("error", function (event) {
+    if (event.target && event.target !== window) {
+      var target = event.target;
+      add("resource", "Failed to load " + (target.tagName || "resource"), target.src || target.href || "", "", target.outerHTML ? target.outerHTML.slice(0,220) : "");
+    } else {
+      add("javascript", event.message || "JavaScript error", event.filename || "", event.lineno || "", event.error && event.error.stack ? event.error.stack : "");
+    }
+  }, true);
+  window.addEventListener("unhandledrejection", function (event) {
+    var reason = event.reason;
+    add("promise rejection", reason && (reason.stack || reason.message) || reason || "Unhandled promise rejection", "", "", "");
+  });
+  var originalError = console.error;
+  console.error = function () {
+    try { add("console.error", Array.prototype.map.call(arguments, function (v) { return v && (v.stack || v.message) || String(v); }).join(" ").slice(0,700), "", "", ""); } catch (_) {}
+    return originalError.apply(console, arguments);
+  };
+  function makeReport() {
+    var root = document.querySelector("[data-framer-generated-page]") || document.body.firstElementChild;
+    var rect = root && root.getBoundingClientRect ? root.getBoundingClientRect() : null;
+    var styles = root ? getComputedStyle(root) : null;
+    var failed = errors.slice();
+    return {
+      app: "Grey portfolio diagnostics",
+      generatedAt: new Date().toISOString(),
+      page: location.href,
+      userAgent: navigator.userAgent,
+      viewport: {width: innerWidth, height: innerHeight, devicePixelRatio: devicePixelRatio},
+      network: {online: navigator.onLine, connection: navigator.connection ? navigator.connection.effectiveType || "unknown" : "not available"},
+      document: {readyState: document.readyState, bodyBackground: getComputedStyle(document.body).backgroundColor, bodyTextLength: (document.body.innerText || "").trim().length, bodyChildCount: document.body.children.length},
+      mainPageElement: root ? {tag:root.tagName, id:root.id || "", className: typeof root.className === "string" ? root.className.slice(0,200) : "", display:styles.display, visibility:styles.visibility, opacity:styles.opacity, width:rect ? Math.round(rect.width) : null, height:rect ? Math.round(rect.height) : null} : "NOT FOUND",
+      resources: {scripts:document.scripts.length, stylesheets:document.styleSheets.length, images:document.images.length, imagesLoaded:Array.prototype.filter.call(document.images,function(i){return i.complete && i.naturalWidth>0;}).length},
+      capturedErrorCount: errors.length,
+      errors: failed
+    };
+  }
+  function copyReport(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){setStatus("Copied! Paste the report into ChatGPT.");}).catch(function(){fallbackCopy(text);});
+    } else fallbackCopy(text);
+  }
+  function fallbackCopy(text) {
+    var area=document.createElement("textarea"); area.value=text; area.setAttribute("readonly","");
+    area.style.cssText="position:fixed;left:-9999px;top:0;opacity:0";
+    document.body.appendChild(area); area.select();
+    try { document.execCommand("copy"); setStatus("Copy attempted. If it failed, select and copy the report below."); }
+    catch(e){setStatus("Select the report text and copy it manually.");}
+    area.remove();
+  }
+  var style=document.createElement("style");
+  style.textContent="#grey-diag-launch{position:fixed!important;right:12px!important;bottom:18px!important;z-index:2147483647!important;background:#f4f4f4!important;color:#111!important;border:1px solid #777!important;border-radius:999px!important;padding:11px 15px!important;font:600 13px/1.2 system-ui,sans-serif!important;box-shadow:0 3px 18px #0008!important;cursor:pointer!important}#grey-diag-panel{position:fixed!important;inset:12px!important;z-index:2147483647!important;background:#101010!important;color:#f7f7f7!important;border:1px solid #555!important;border-radius:16px!important;padding:16px!important;box-shadow:0 0 0 9999px #000b!important;font:14px/1.45 system-ui,sans-serif!important;display:none;overflow:auto!important;max-width:none!important;width:auto!important;height:auto!important}#grey-diag-panel *{box-sizing:border-box!important;font-family:system-ui,sans-serif!important}#grey-diag-panel button{background:#f3f3f3!important;color:#111!important;border:0!important;border-radius:9px!important;padding:10px 12px!important;font-weight:700!important;margin:4px 6px 8px 0!important}#grey-diag-panel pre{white-space:pre-wrap!important;overflow-wrap:anywhere!important;background:#1d1d1d!important;border:1px solid #444!important;border-radius:8px!important;padding:10px!important;color:#eee!important;font:11px/1.4 monospace!important;max-height:48vh!important;overflow:auto!important}#grey-diag-panel h2{font-size:18px!important;margin:0 0 8px!important}#grey-diag-panel p{margin:5px 0 12px!important}";
+  (document.head || document.documentElement).appendChild(style);
+  var launch=document.createElement("button"); launch.id="grey-diag-launch"; launch.type="button"; launch.textContent="⚠ Report a bug";
+  var panel=document.createElement("section"); panel.id="grey-diag-panel"; panel.setAttribute("role","dialog"); panel.setAttribute("aria-label","Grey error diagnostics");
+  panel.innerHTML='<h2>Grey — Error Diagnostics</h2><p>Tap <b>Copy report</b> and paste it into ChatGPT. The report includes browser/device details and captured errors, not passwords or form contents.</p><button type="button" id="grey-diag-copy">Copy report</button><button type="button" id="grey-diag-refresh">Refresh report</button><button type="button" id="grey-diag-close">Close</button><pre id="grey-diag-output">Collecting diagnostics…</pre><p id="grey-diag-status" aria-live="polite"></p>';
+  function setStatus(message){var s=document.getElementById("grey-diag-status");if(s)s.textContent=message;}
+  function render(){var out=document.getElementById("grey-diag-output");if(out)out.textContent=JSON.stringify(makeReport(),null,2);}
+  launch.addEventListener("click",function(){panel.style.display="block";render();});
+  panel.addEventListener("click",function(e){
+    if(e.target.id==="grey-diag-close") panel.style.display="none";
+    if(e.target.id==="grey-diag-refresh") render();
+    if(e.target.id==="grey-diag-copy"){render();copyReport(document.getElementById("grey-diag-output").textContent);}
+  });
+  document.body.appendChild(launch); document.body.appendChild(panel);
+  setTimeout(function(){
+    var root=document.querySelector("[data-framer-generated-page]");
+    var rect=root && root.getBoundingClientRect();
+    var st=root && getComputedStyle(root);
+    if(!root || !rect || rect.height < 20 || !st || st.display==="none" || st.visibility==="hidden" || st.opacity==="0" || (document.body.innerText||"").trim().length<20){
+      add("page health","Possible blank page or hidden main content",location.href,"","Auto-opened diagnostics because the main page appears empty or hidden.");
+      panel.style.display="block"; render();
+    }
+  },1800);
+})();
+</script>
 </body>
 </html>
