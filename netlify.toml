@@ -1,10 +1,8 @@
-# Grey — static Framer export
-# No build command is required; the exported HTML files are already in the repository root.
-
+# Grey is a pre-exported static Framer website; do not run npm/Next.js builds.
 [build]
+  command = "echo 'Static Framer export: no build step required'"
   publish = "."
 
-# Let Netlify serve clean URLs for exported .html pages.
 [build.processing]
   skip_processing = true
 
