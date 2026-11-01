@@ -1,0 +1,21 @@
+# Grey — static Framer export
+# No build command is required; the exported HTML files are already in the repository root.
+
+[build]
+  publish = "."
+
+# Let Netlify serve clean URLs for exported .html pages.
+[build.processing]
+  skip_processing = true
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
