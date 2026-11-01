@@ -200,14 +200,14 @@ const raw = {
       id: 2,
       en_q: 'What file formats will I receive?',
       hi_q: 'मुझे कौन से फ़ाइल फॉर्मेट मिलेंगे?',
-      en_a: 'Add your text here.'ll receive all source files (AI, PSD) plus export-ready formats (SVG, PNG, PDF, WebP) for every deliverable — ready for print and digital use.',
+      en_a: 'Add your text here.',
       hi_a: 'अपना टेक्स्ट यहाँ जोड़ें।',
     },
     {
       id: 3,
       en_q: 'How many revision rounds are included?',
       hi_q: 'कितने रिविज़न राउंड शामिल हैं?',
-      en_a: 'Add your text here.'ll discuss this upfront.',
+      en_a: 'Add your text here.',
       hi_a: 'अपना टेक्स्ट यहाँ जोड़ें।',
     },
     {
