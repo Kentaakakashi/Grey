@@ -267,7 +267,7 @@ fbq('track', 'PageView');
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-P8H8DQ7GZ3"></script>
 <style>#__framer-badge-container,#__framer-editorbar-container,[class*="framer-badge"],[class*="framer-editor"],iframe[src*="framer.com"]:not([src*="framerusercontent"]){display:none!important}</style>
-<style id="grey-single-designer-cleanup">[name="Get Template Button"],[data-framer-name="Get Template Button"],a[href*="framer.com/community/marketplace/templates/"]{display:none!important}</style>
+<style id="grey-single-designer-cleanup">/* Keep the circular featured portrait; remove only the row of alternate staff portraits. */[data-framer-name="Team Member Selector"]{display:none!important}[name="Get Template Button"],[data-framer-name="Get Template Button"],a[href*="framer.com/community/marketplace/templates/"]{display:none!important}</style>
 </head>
 <body>
 
@@ -374,5 +374,5 @@ fbq('track', 'PageView');
   },1800);
 })();
 </script>
-</body>
+<script id="grey-hide-team-label">(function(){function hideLabel(){document.querySelectorAll("p").forEach(function(p){if((p.textContent||"").trim()==="(the team)"){var target=p.closest('[data-framer-name="RichTextContainer"]')||p.parentElement;if(target)target.style.setProperty("display","none","important");}});}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hideLabel);else hideLabel();setTimeout(hideLabel,1000);})();</script></body>
 </html>
