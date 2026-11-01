@@ -271,19 +271,19 @@ fbq('track', 'PageView');
 /* Grey: single-person portfolio cleanup */
 [name="Get Template Button"],
 [data-framer-name="Get Template Button"],
-[data-framer-name="About Team"],
-[data-framer-name="Team Member Grid"],
-[data-framer-name="Team Member Selector"],
-[data-framer-name="Team Introduction"],
-[data-framer-name="Our Clients"],
-[data-framer-name="Other Agency"],
-[data-framer-name="Testimonial"],
-[data-framer-name="Testimonials"],
-[data-framer-name="testimonial"],
-[data-framer-name="(the team)"],
-[data-framer-name="+ BASED IN Row"] { display:none !important; }
-/* Remove the Framer marketplace badge even if nested wrappers are renamed. */
 a[href*="framer.com/community/marketplace/templates/"] { display:none !important; }
+/* Hide whole agency/team/testimonial modules, not only their labels. */
+div:has([data-framer-name="Team Member Selector"]),
+div:has([data-framer-name="Ethan Member Button"]),
+div:has([data-framer-name="Team Member Grid"]),
+div:has([data-framer-name="Team Introduction"]),
+div:has([data-framer-name="(the team)"]),
+div:has([data-framer-name="About Team"]),
+div:has([data-framer-name="Our Clients"]),
+div:has([data-framer-name="Other Agency"]),
+div:has([data-framer-name="Testimonial"]),
+div:has([data-framer-name="Testimonials"]),
+div:has([data-framer-name="+ BASED IN Row"]) { display:none !important; }
 </style>
 </head>
 <body>
