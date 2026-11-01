@@ -26,8 +26,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: package-lock.json
 
       - name: Import upstream template files
         shell: bash
@@ -35,7 +33,6 @@ jobs:
           set -euo pipefail
           git clone --depth 1 https://github.com/pawan-joshee/portfolio-website-for-graphic-designers.git /tmp/graphic-portfolio
           rsync -a --delete --exclude='.git/' --exclude='.github/' /tmp/graphic-portfolio/ ./
-          # Ensure the Netlify deployment configuration remains at the repository root.
           cat > netlify.toml <<'EOF'
           [build]
             command = "npm ci && npm run build"
@@ -45,7 +42,6 @@ jobs:
             NODE_VERSION = "20"
           EOF
           printf '20\n' > .nvmrc
-          # Next.js is already configured for static export in next.config.ts.
           node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json','utf8'));if(!p.scripts||!p.scripts.build)throw new Error('Missing build script');console.log('Build script:',p.scripts.build)"
 
       - name: Install dependencies
