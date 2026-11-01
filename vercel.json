@@ -1,6 +1,0 @@
-{
-  "buildCommand": "npm run export:hostinger",
-  "outputDirectory": "out",
-  "framework": "nextjs",
-  "installCommand": "npm install"
-}
